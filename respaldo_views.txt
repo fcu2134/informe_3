@@ -1,0 +1,57 @@
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+from django.db import models
+
+from modelos import carr_mod, carrera , docente ,est_mod , estado , estudiante ,jefe_carrera,jornada, mod_doc , modulo, sala , semestre , usuario
+
+@csrf_exempt
+def html(request):
+    return render(request, "informe_3.html")
+
+@csrf_exempt
+def buscar(request):
+    
+    nombre = request.POST['nombre']
+    apellido = request.POST["apellido"]
+    run = request.POST['run']
+    carrera = request.POST['carrera']
+    nt_1 = float(request.POST['nt_1'])  # Convertir a float
+    nt_2 = float(request.POST['nt_2'])
+    nt_3 = float(request.POST['nt_3'])
+    nt_4 = float(request.POST['nt_4'])
+    nt_5 = float(request.POST['nt_5'])
+    nt_6 = float(request.POST['nt_6'])
+    
+    modulo = request.POST["modulo"]
+
+    porc_nt_1 = 0.15
+    porc_nt_2 = 0.15
+    porc_nt_3 = 0.2
+    porc_nt_4 = 0.2
+    porc_nt_5 = 0.15
+    porc_nt_6 = 0.15
+
+    promedio = round((nt_1 * porc_nt_1) + (nt_2 * porc_nt_2) + (nt_3 * porc_nt_3) + (nt_4 * porc_nt_4) + (nt_5 * porc_nt_5) + (nt_6 * porc_nt_6), 2)
+
+    promedio = max(1, min(7, promedio))
+
+    return render(request, 'entregado.html', {'nombre': nombre, "run": run, "carrera": carrera, "nt_1": nt_1, "nt_2": nt_2, "nt_3": nt_3, "nt_4": nt_4, "nt_5": nt_5, "nt_6": nt_6, "promedio": promedio, "modulo": modulo, "apellido": apellido})
+
+
+    mydb=mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="cft"
+    )
+    mycursor= mydb.cursor()
+    estudiante=estudiante(5,"stefy","villa")
+    carrera=carrera(50,"","")
+
+
+    sqlestudiante = "INSERT into gato(estudiante.run,estudiante_nombre_est,estudiante_apellido) VALUES (%s,%s,%s)"
+    estudiante_val =(estudiante.run,estudiante.nombre_est,estudiante.apellido)
+
+    mycursor.execute(estudiante,estudiante_val)
+    mydb.commit()
+    print("1 registro se ah ingresado,id",mycursor.lastrowid)

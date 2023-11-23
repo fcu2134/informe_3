@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es-ch">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>prueba.tabla</title>
+  <style>
+    table, th, td {
+      height: 30px; /* Ajustado para una mejor visibilidad de las celdas */
+      border-style: ridge;
+      background-color: rgb(213, 176, 248);
+    }
+
+    /* Estilos para las celdas del formulario */
+    td {
+      width: 20px;
+     
+    }
+
+    #botons {
+      position: relative;
+      left: 20%;
+      top: 60%;
+    }
+
+    #cuerpo {
+      height: 50px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -50px; /* Corregido el valor del margen */
+    }
+  </style>
+</head>
+
+<body id="cuerpo">
+  <form method="POST" action="/buscar/">
+    {% csrf_token %}
+    <table>
+      <tr id="h3">
+        <td><h3>formulario_estudiante</h3></td>
+      </tr>
+      <tr>
+        <td><label for="nombre">nombre completo:</label></td>
+        <td><input type="text" placeholder="nombre completo" name="nombre"><br></td>
+      </tr>
+      <tr>
+        <td><label for="apellido">apellido:</label></td>
+        <td><input type="text" placeholder="apellido" name="apellido"><br></td>
+      </tr>
+      <tr>
+        <td><label for="run">run</label></td>
+        <td><input type="text" placeholder="run" name="run" maxlength="8"><br></td> <!-- Corregido 'limit' a 'maxlength' -->
+      </tr>
+      <tr>
+        <td><label for="carrera">carrera</label></td>
+        <td><input type="text" placeholder="carrera" id="carrera" name="carrera"><br></td>
+      </tr>
+      <tr>
+        <td><label for="text">notas</label></td>
+        <td>
+          <input type="text" name="nt_1">
+          <input type="text" id="nt2" name="nt_2">
+          <input type="text" id="c" name="nt_3">
+          <input type="text" id="d" name="nt_4">
+          <input type="text" id="e" name="nt_5">
+          <input type="text" id="f" name="nt_6">
+        </td>
+      </tr>
+      <tr>
+        <td><label for="modulo">modulo</label></td>
+        <td><input type="text" placeholder="modulo" name="modulo"><br></td>
+      </tr>
+      <tr>
+        <td id="botons">
+          <input type="submit" value="enviar">
+          <input type="reset" value="reiniciar">
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>
