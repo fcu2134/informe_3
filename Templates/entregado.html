@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es-ch">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Tabla</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(29, 27, 27);
+            margin: 20px;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        #botons {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body id="cuerpo">
+    <table>
+        <form method="POST" action="/pagina/">
+            <tr>
+                <td colspan="2"><h2>Formulario Estudiante</h2></td>
+            </tr>
+
+            <tr>
+                <td>Nombre completo:</td>
+                <td>{{nombre}}</td>
+            </tr>
+            <tr>
+                <td>Apellido:</td>
+                <td>{{apellido}}</td>
+            </tr>
+            <tr>
+                <td>Run:</td>
+                <td>{{run}}</td>
+            </tr>
+
+            <tr>
+                <td>Carrera:</td>
+                <td>{{carrera}}</td>
+            </tr>
+            <tr>
+                <td>nt_1:</td>
+                <td>{{nt_1}}</td>
+            </tr>
+            <tr>
+                <td>nt_2</td>
+                <td>{{nt_2}}</td>
+            </tr>
+            <tr>
+                <td>nt_3</td>
+                <td>{{nt_3}}</td>
+            </tr>
+            <tr>
+                <td>nt_4</td>
+                <td>{{nt_4}}</td>
+            </tr>
+            <tr>
+                <td>nt_5</td>
+                <td>{{nt_5}}</td>
+            </tr>
+            <tr>
+                <td>nt_6</td>
+                <td>{{nt_6}}</td>
+            </tr>
+            <tr>
+                <td>Promedio:</td>
+                <td>{{promedio}}</td>
+            </tr>
+            <tr>
+                <td>Modulo:</td>
+                <td>{{modulo}}</td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="submit" id="botons" value="Enviar"></td>
+            </tr>
+        </form>
+    </table>
+</body>
+
+</html>
