@@ -2,6 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 import mysql.connector
 from informe_3.modelos.usuario import Usuario
+from informe_3.modelos.estado import Estado
 from django.http import HttpResponse
 
  
@@ -14,29 +15,30 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 
-
 @csrf_exempt
 def basededatos(request):
-    otroid_usuario = int(request.POST['id_usuario'])
-    otronombre_usuario = str(request.POST['nombre_usuario'])
+    otroid_usuario = int(request.POST.get('id_usuario'))
+    otronombre_usuario = str(request.POST.get('nombre_usuario'))
+    otroestado = str(request.POST.get('estado_id'))
+    otrodescripcion = str(request.POST.get('descripcion'))
+    otrofecha_hora = str(request.POST.get('fecha_hora'))
 
-    # Crear una instancia de la clase Usuario
     nuevo_usuario = Usuario(otroid_usuario, otronombre_usuario)
-    
+    nuevo_estado = Estado(otroestado, otroid_usuario, otrodescripcion, otrofecha_hora)
 
-    sql = "INSERT usuario (id_usuario, nombre_usuario) VALUES (%s, %s)"
-    
-    # Utilizar los valores de la instancia, no de la clase
-    val = (nuevo_usuario.id_usuario, nuevo_usuario. nombre_usuario)
-    
-    mycursor.execute(sql, val)
+    sql_usuario = "INSERT INTO usuario (id_usuario, nombre_usuario) VALUES (%s, %s)"
+    val_usuario = (nuevo_usuario.id_usuario, nuevo_usuario.nombre_usuario)
+    mycursor.execute(sql_usuario, val_usuario)
+
+    sql_estado = "INSERT INTO estado (estado_id, id_usuario, descripcion, fecha_hora) VALUES (%s, %s, %s, %s)"
+    val_estado = (nuevo_estado.estado_id, nuevo_estado.id_usuario, nuevo_estado.descripcion, nuevo_estado.fecha_hora)
+    mycursor.execute(sql_estado, val_estado)
+
     mydb.commit()
-    if otroid_usuario and otronombre_usuario:
-            
 
-            return render(request, 'datos_enviados.html', {'id_usuario': otroid_usuario, "nombre_usuario": otronombre_usuario})
-    else:
-            return HttpResponse("Campos 'id_usuario' o 'nombre_usuario' faltantes en la solicitud.")
+    return render(request, 'datos_enviados.html', {'id_usuario': otroid_usuario, 'nombre_usuario': otronombre_usuario, 'estado_id': otroestado, 'descripcion': otrodescripcion, 'fecha_hora': otrofecha_hora})
+
+#me faltaron tablas profe pero no me dio tiempo :C
     
 @csrf_exempt
 def user(request):
