@@ -3,7 +3,7 @@ from django.shortcuts import render
 import mysql.connector
 from informe_3.modelos.usuario import Usuario
 from django.http import HttpResponse
-from django import forms
+
  
 mydb = mysql.connector.connect(
         host="localhost",
@@ -22,8 +22,7 @@ def basededatos(request):
 
     # Crear una instancia de la clase Usuario
     nuevo_usuario = Usuario(otroid_usuario, otronombre_usuario)
-    # Crear un formulario de confirmación
-    #confirmacion_form = ConfirmacionForm({'mensaje': 'La información se ha enviado correctamente.'})
+    
 
     sql = "INSERT usuario (id_usuario, nombre_usuario) VALUES (%s, %s)"
     
